@@ -1,0 +1,9 @@
+{% block element_hb_lawtext %}
+    <div class="cms-element-hb-lawtext">
+
+        {% set element = block.slots.getSlot('siteId') %}
+
+        {{ element.data.content | raw }}
+
+    </div>
+{% endblock %}

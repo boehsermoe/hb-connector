@@ -1,0 +1,29 @@
+{
+  "name": "boehsermoe/hb-connector",
+  "version": "v1.0.0",
+  "type": "shopware-platform-plugin",
+  "description": "Händlerbund Connector",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1",
+    "shopware/core": "~6.5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Boehsermoe\\HbConnector\\": ""
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "Boehsermoe\\HbConnector\\BoehsermoeHbConnector",
+    "plugin-icon": "Resources/config/plugin.png",
+    "label": {
+      "de-DE": "Händlerbund Connector",
+      "en-GB": "Händlerbund Connector"
+    },
+    "description": {
+      "de-DE": "Händlerbund Connector",
+      "en-GB": "Händlerbund Connector"
+    },
+    "copyright": "(c) Bennet Klarhölter"
+  }
+}

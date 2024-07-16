@@ -1,0 +1,10 @@
+{% block sw_cms_element_hblawtext_config %}
+    <sw-single-select
+            v-model="siteId"
+            :options="siteIdOptions"
+            class="swag-siteId-field"
+            label="Select law text site"
+            placeholder="Select law texdt site..."
+            @update:value="onElementUpdate">
+    </sw-single-select>
+{% endblock %}

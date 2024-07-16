@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Händlerbund Konfiguration</title>
+        <input-field>
+            <name>apiKey</name>
+            <label>HB API Key</label>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>textmode</name>
+            <options>
+                <option>
+                    <id>plain</id>
+                    <name>Plain text</name>
+                    <name lang="de-DE">Einfacher Text</name>
+                </option>
+                <option>
+                    <id>html</id>
+                    <name>HTML Text</name>
+                    <name lang="de-DE">HTML Text</name>
+                </option>
+                <option>
+                    <id>classes</id>
+                    <name>HTML Text with css classes</name>
+                    <name lang="de-DE">HTML Text mit css Klassen</name>
+                </option>
+            </options>
+            <defaultValue>classes</defaultValue>
+            <label>Textmodus</label>
+            <label lang="de-DE">Textmodus</label>
+        </input-field>
+
+<!--        "agb",-->
+<!--        "widerruf",-->
+<!--        "widerruf_download",-->
+<!--        "widerruf_reperatur",-->
+<!--        "zahlungundversand",-->
+<!--        "datenschutz",-->
+<!--        "impressum",-->
+<!--        "batterie",-->
+<!--        -->
+
+
+
+    </card>
+</config>

@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="true" autoconfigure="true" />
+
+        <prototype namespace="Boehsermoe\HbConnector\" resource="../../" exclude="../../{DependencyInjection,Entity,BoehsermoeHbConnector.php}"/>
+
+
+        <service id="Boehsermoe\HbConnector\DataResolver\HbLawtextCmsElementResolver">
+            <tag name="shopware.cms.data_resolver" />
+            <argument type="service" id="Boehsermoe\HbConnector\Service\HbApiService"/>
+        </service>
+
+        <service id="Boehsermoe\HbConnector\Service\HbApiService" public="true">
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="sales_channel.repository"/>
+            <argument type="service" id="language.repository"/>
+        </service>
+
+        <service id="Boehsermoe\HbConnector\Service\ScheduledTask\HbSyncTask">
+            <tag name="shopware.scheduled.task" />
+        </service>
+        <service id="Boehsermoe\HbConnector\Service\ScheduledTask\HbSyncTaskHandler">
+            <argument type="service" id="scheduled_task.repository" />
+            <tag name="messenger.message_handler" />
+        </service>
+    </services>
+</container>
