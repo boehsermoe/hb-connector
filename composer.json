@@ -1,6 +1,6 @@
 {
   "name": "boehsermoe/hb-connector",
-  "version": "v1.0.1",
+  "version": "v1.0.0",
   "type": "shopware-platform-plugin",
   "description": "Händlerbund Connector",
   "license": "proprietary",
@@ -10,7 +10,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Boehsermoe\\HbConnector\\": ""
+      "Boehsermoe\\HbConnector\\": "BoehsermoeHbConnector/"
     }
   },
   "extra": {
