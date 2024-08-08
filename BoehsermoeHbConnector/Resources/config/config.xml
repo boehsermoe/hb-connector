@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
 
     <card>
-        <title>Händlerbund Konfiguration</title>
+        <title>Händlerbund Konfiguration v1.0.0-p3</title>
         <input-field>
             <name>apiKey</name>
             <label>HB API Key</label>
@@ -44,6 +44,9 @@
 <!--        -->
 
 
+        <component name="hblawtext-request-button">
+            <name>requestButton</name>
+        </component>
 
     </card>
 </config>

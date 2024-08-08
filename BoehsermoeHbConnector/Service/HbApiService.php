@@ -121,7 +121,14 @@ class HbApiService
         $results = [];
         foreach ($this->getShops() as $saleChannel) {
             foreach ($saleChannel->getLanguages() as $language) {
-                $results[] = $this->updateSingleLawText($saleChannel->getId(), $language);
+                $response = $this->updateSingleLawText($saleChannel->getId(), $language);
+                if ($response['success']) {
+                    $results['success'][$saleChannel->getName()][$language->getLocale()->getCode()] = $response['success'];
+                } elseif ($response['error']) {
+                    $results['error'][$saleChannel->getName()][$language->getLocale()->getCode()] = $response['error'];
+                } else {
+                    $results['error'][$saleChannel->getName()][$language->getLocale()->getCode()] = 'No response';
+                }
             }
         }
 
@@ -141,7 +148,7 @@ class HbApiService
                 'response' => 'API key is empty or false',
                 'state' => 0
             ]);
-            return ['success' => false];
+            return ['error' => 'API key is empty or false'];
         }
 
         if (strlen($shopconfig['apiKey']) !== 36) {
@@ -152,31 +159,31 @@ class HbApiService
                 'response' => 'API key is not 36 characters long',
                 'state' => 0
             ]);
-            return ['success' => false];
+            return ['error' => 'API key is not 36 characters long'];
         }
 
-        $updateStatus = true;
+        $updateStatuses = [];
         foreach (self::SITES as $site) {
             $options = ['site' => $site, 'lang' => $shopconfig['lang'], 'textmode' => $shopconfig['textmode']];
-            $remote_lawtext = $this->getRemoteLawTexts($options, trim($shopconfig['apiKey']));
+            $response = $this->getRemoteLawTexts($options, trim($shopconfig['apiKey']));
 
-            if ($remote_lawtext['status'] != 200 || $remote_lawtext['data'] == '' || $remote_lawtext['data'] == 'SHOP_NOT_FOUND') {
+            if ($response['status'] != 200 || $response['data'] == '' || $response['data'] == 'SHOP_NOT_FOUND') {
                 $this->writeLog([
                     'shop_id' => $salesChannelId,
                     'site_id' => $site,
                     'request' => 'Could not update page with site_id: ' . $site,
-//                    'response' => $remote_lawtext['data'],
+//                    'response' => $response['data'],
                     'state' => 0
                 ]);
-                $updateStatus = false;
+                $updateStatuses[$site] = $response;
             } else {
-                $this->updateSystemConfig($site, $remote_lawtext['data'], $salesChannelId, $shopconfig['lang']);
-//                $updateStatus = $this->updateCmsSite($site, $remote_lawtext, $salesChannelId, $language);
-                $updateStatus = true;
+                $this->updateSystemConfig($site, $response['data'], $salesChannelId, $shopconfig['lang']);
+//                $updateStatus = $this->updateCmsSite($site, $response, $salesChannelId, $language);
+                $updateStatuses[$site] = 'success';
             }
         }
 
-        return ['success' => $updateStatus];
+        return ['success' => $updateStatuses];
     }
 
     private function getShops()
@@ -196,8 +203,8 @@ class HbApiService
 
     private function getShopConfig($salesChannelId)
     {
-        $apiKey = $this->systemConfigService->get('HbRechtstexte.config.apiKey', $salesChannelId);
-        $textmode = $this->systemConfigService->get('HbRechtstexte.config.textmode', $salesChannelId);
+        $apiKey = $this->systemConfigService->get('BoehsermoeHbConnector.config.apiKey', $salesChannelId);
+        $textmode = $this->systemConfigService->get('BoehsermoeHbConnector.config.textmode', $salesChannelId);
 
         return [
             'apiKey' => $apiKey,
@@ -287,7 +294,7 @@ class HbApiService
 
     protected function updateSystemConfig(string $site, string $remote_lawtext, $salesChannelId, string $langCode)
     {
-        $this->systemConfigService->set("HbRechtstexte.config.lawtext.$site.$langCode", $remote_lawtext, $salesChannelId);
+        $this->systemConfigService->set("BoehsermoeHbConnector.config.lawtext.$site.$langCode", $remote_lawtext, $salesChannelId);
         $this->writeLog([
             'shop_id' => $salesChannelId,
             'site_id' => $site,
@@ -301,7 +308,7 @@ class HbApiService
 
     protected function getSystemConfig(string $site, string $langCode, ?string $salesChannelId = null) : ?string
     {
-        return $this->systemConfigService->getString("HbRechtstexte.config.lawtext.$site.$langCode", $salesChannelId);
+        return $this->systemConfigService->getString("BoehsermoeHbConnector.config.lawtext.$site.$langCode", $salesChannelId);
     }
 
     public function getLawText(string $site, SalesChannelContext $context)
