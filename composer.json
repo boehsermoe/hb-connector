@@ -2,7 +2,7 @@
   "name": "boehsermoe/hb-connector",
   "version": "v1.0.0",
   "type": "shopware-platform-plugin",
-  "description": "Händlerbund Connector",
+  "description": "Shopware 6 - Händlerbund Connector",
   "license": "proprietary",
   "require": {
     "php": ">=8.1",

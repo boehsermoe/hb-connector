@@ -1,6 +1,18 @@
+# Händlerbund Connector
+
 Das Plugin liefert CMS Blöcke zum Einbinden von Rechtstext aus der Händlerbund Konto. Die Rechtstexte werden regelmäßig über die Schnittstelle aktualisiert.
 
-Konfiguration
+
+## Instalation
+```
+composer require boehsermoe/hb-connector
+```
+
+oder per ZIP herunterladen und übers Backend installieren
+https://github.com/boehsermoe/hb-connector/releases/tag/1.0.0
+
+## Konfiguration
+
 In der Plugin Konfiguration den API Key aus dem Händlerbund hinterlegt und speichern. Zusätzlich kann das Format gewählt werden (Einfacher Text, HTML oder HTML mit CSS Klassen).
 
 
@@ -13,5 +25,6 @@ Die Texte werden regelmäßig über die Scheduled Task aktualisiert. Man diese a
 
 
 
-CMS Block
+## CMS Block
+
 In den CMS Layout bzw. den Erlebniswelten findest du in der Kategorie "Text" den Block "HB Rechtstexte", diesen kannst du beliebig platzieren und im Block selber kannst du dann den Text wählen, der angezeigt werden soll.
