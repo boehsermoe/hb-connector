@@ -1,6 +1,6 @@
 {
   "name": "boehsermoe/hb-connector",
-  "version": "v1.0.1",
+  "version": "v1.0.2",
   "type": "shopware-platform-plugin",
   "description": "Shopware 6 - Händlerbund Connector",
   "license": "proprietary",
