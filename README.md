@@ -1,3 +1,5 @@
+TEST
+
 # Händlerbund Connector
 
 Das Plugin liefert CMS Blöcke zum Einbinden von Rechtstext aus der Händlerbund Konto. Die Rechtstexte werden regelmäßig über die Schnittstelle aktualisiert.
