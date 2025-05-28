@@ -5,3 +5,5 @@ pull_request_rules:
       - label = automerge
     actions:
       merge:
+queue_rules:
+  - name: Main
